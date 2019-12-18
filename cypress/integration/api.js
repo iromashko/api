@@ -102,6 +102,15 @@ describe("Bootcamp API", () => {
     );
   });
 
+  it("Get bootcamp courses query", () => {
+    cy.request(
+      "GET",
+      "/api/v1/bootcamps/1337842d5bf1fc6900a11fb3/courses"
+    ).then(response => {
+      expect(response.body).to.have.property("success", true);
+    });
+  });
+
   it("Delete bootcamp", () => {
     cy.request("DELETE", "/api/v1/bootcamps/1337842d5bf1fc6900a11fb3").then(
       response => {
