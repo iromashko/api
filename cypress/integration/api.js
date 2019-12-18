@@ -5,15 +5,27 @@ describe("Bootcamp API", () => {
       .its("body")
       .its("data");
 
-  it("List bootcamps", () => {
+  it("Server alive", () => {
     cy.request("/api/v1/bootcamps")
       .its("headers")
       .its("content-type")
       .should("include", "application/json");
   });
 
-  it("list 5 bootcamps", () => {
+  it("List bootcamps", () => {
     getItems().should("have.length", 5);
+  });
+
+  it("Response have pagination", () => {
+    cy.request("GET", "/api/v1/bootcamps")
+      .its("body")
+      .should("have.property", "pagination");
+  });
+
+  it("Response have counter", () => {
+    cy.request("GET", "/api/v1/bootcamps")
+      .its("body")
+      .should("have.property", "count");
   });
 
   it("Bootcamps have properties", () => {
