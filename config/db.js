@@ -7,7 +7,7 @@ const connectDB = async () => {
     useCreateIndex: true,
     useFindAndModify: false
   });
-  console.log(`database connected ${db.connection.host}`);
+  console.log(`database connected on ${db.connection.host}`);
 };
 
 module.exports = connectDB;

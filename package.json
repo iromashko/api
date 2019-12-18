@@ -6,9 +6,17 @@
   "scripts": {
     "start": "NODE_ENV=development nodemon server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iromashko/api.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iromashko/api/issues"
+  },
+  "homepage": "https://github.com/iromashko/api#readme",
   "dependencies": {
     "cypress": "^3.8.0",
     "dotenv": "^8.2.0",

@@ -47,7 +47,7 @@ const seedDB = async () => {
   }
 
   console.log(`bootcamps seeded`);
-  //////////////////
+  //////////////////////
   await Course.deleteMany();
 
   for (const i of new Array(20)) {
@@ -58,10 +58,12 @@ const seedDB = async () => {
       weeks: faker.random.number(),
       minimumSkill: "beginner",
       scholarshipsAvailable: faker.random.boolean(),
-      bootcamp: await Bootcamp.findOne().skip(Math.floor(Math.random() * 20))
+      bootcamp: await Bootcamp.findOne().skip(Math.floor(Math.random * 20))
     };
-    Course.create(course);
+
+    await Course.create(course);
   }
+
   console.log(`courses seeded`);
 };
 

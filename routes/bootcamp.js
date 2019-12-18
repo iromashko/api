@@ -3,10 +3,10 @@ const router = express.Router();
 const {
   getBootcamp,
   getBootcamps,
+  getBootcampsInRadius,
   createBootcamp,
   updateBootcamp,
-  deleteBootcamp,
-  getBootcampsInRadius
+  deleteBootcamp
 } = require("../controllers/bootcamp");
 
 router.use("/:bootcampId/courses", require("./courses"));

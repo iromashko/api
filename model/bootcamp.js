@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
+const slugify = require("slugify");
 const geocoder = require("../utils/geocoder");
 
-const slugify = require("slugify");
-
-const bootcampSchema = new mongoose.Schema({
+const BootcampSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Please add a name"],
@@ -101,11 +100,12 @@ const bootcampSchema = new mongoose.Schema({
   }
 });
 
-bootcampSchema.pre("save", function(next) {
+BootcampSchema.pre("save", function(next) {
   this.slug = slugify(this.name, { lower: true });
   next();
 });
-bootcampSchema.pre("save", async function(next) {
+
+BootcampSchema.pre("save", async function(next) {
   const loc = await geocoder.geocode(this.address);
   this.location = {
     type: "Point",
@@ -122,4 +122,4 @@ bootcampSchema.pre("save", async function(next) {
   next();
 });
 
-module.exports = new mongoose.model("Bootcamp", bootcampSchema);
+module.exports = new mongoose.model("Bootcamp", BootcampSchema);
