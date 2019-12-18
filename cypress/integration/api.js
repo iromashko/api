@@ -63,6 +63,19 @@ describe("Bootcamp API", () => {
     });
   });
 
+  it("Update bootcamp", () => {
+    const bootcamp = {
+      name: "Name Updated"
+    };
+    cy.request(
+      "PUT",
+      "/api/v1/bootcamps/1337842d5bf1fc6900a11fb3",
+      bootcamp
+    ).then(response => {
+      expect(response.body).to.have.property("success", true);
+    });
+  });
+
   it("Delete bootcamp", () => {
     cy.request("DELETE", "/api/v1/bootcamps/1337842d5bf1fc6900a11fb3").then(
       response => {
@@ -70,5 +83,22 @@ describe("Bootcamp API", () => {
         expect(response.body).to.have.property("data", "bootcamp deleted");
       }
     );
+  });
+
+  it("Limit query", () => {
+    cy.request("GET", "/api/v1/bootcamps?limit=3")
+      .its("body")
+      .its("data")
+      .should("have.length", 3);
+  });
+
+  it("Select query", () => {
+    cy.request("GET", "/api/v1/bootcamps?select=name,description")
+      .its("body")
+      .its("data")
+      .should("have.length", 5)
+      .each(value =>
+        expect(value).to.have.all.keys("_id", "name", "description")
+      );
   });
 });
