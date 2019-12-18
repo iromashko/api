@@ -16,6 +16,13 @@ describe("Bootcamp API", () => {
     getItems().should("have.length", 5);
   });
 
+  it("List courses", () => {
+    cy.request("/api/v1/courses")
+      .its("body")
+      .its("data")
+      .should("have.length", 20);
+  });
+
   it("Response have pagination", () => {
     cy.request("GET", "/api/v1/bootcamps")
       .its("body")
@@ -71,7 +78,6 @@ describe("Bootcamp API", () => {
     };
     cy.request("POST", "/api/v1/bootcamps", bootcamp).then(response => {
       expect(response.body).to.have.property("success", true);
-      // expect(response.body).to.have.property("data", {});
     });
   });
 
