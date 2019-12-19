@@ -1,9 +1,9 @@
-// require("./config/seed_db")();
 require("dotenv").config({ path: "./config/config.env" });
 require("./config/db")();
 const express = require("express");
 const app = express();
 app.use(express.json());
+// require("./config/seed_db")();
 
 app.use("/api/v1/bootcamps", require("./routes/bootcamp"));
 app.use("/api/v1/courses", require("./routes/courses"));

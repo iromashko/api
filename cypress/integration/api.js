@@ -46,6 +46,7 @@ describe("Bootcamp API", () => {
         "jobGuarantee",
         "acceptGi",
         "_id",
+        "id",
         "name",
         "description",
         "website",
@@ -54,7 +55,8 @@ describe("Bootcamp API", () => {
         "averageCost",
         "createdAt",
         "slug",
-        "__v"
+        "__v",
+        "courses"
       )
     );
   });
@@ -111,13 +113,10 @@ describe("Bootcamp API", () => {
     });
   });
 
-  it("Delete bootcamp", () => {
-    cy.request("DELETE", "/api/v1/bootcamps/1337842d5bf1fc6900a11fb3").then(
-      response => {
-        expect(response.body).to.have.property("success", true);
-        expect(response.body).to.have.property("data", "bootcamp deleted");
-      }
-    );
+  it("Query bootcamps", () => {
+    cy.request("GET", "/api/v1/bootcamps?slug=test-cypress").then(response => {
+      expect(response.body).to.have.property("success", true);
+    });
   });
 
   it("Limit query", () => {
@@ -133,7 +132,22 @@ describe("Bootcamp API", () => {
       .its("data")
       .should("have.length", 5)
       .each(value =>
-        expect(value).to.have.all.keys("_id", "name", "description")
+        expect(value).to.have.all.keys(
+          "_id",
+          "id",
+          "name",
+          "description",
+          "courses"
+        )
       );
+  });
+
+  it("Delete bootcamp", () => {
+    cy.request("DELETE", "/api/v1/bootcamps/1337842d5bf1fc6900a11fb3").then(
+      response => {
+        expect(response.body).to.have.property("success", true);
+        expect(response.body).to.have.property("data", "bootcamp deleted");
+      }
+    );
   });
 });
