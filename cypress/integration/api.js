@@ -23,6 +23,12 @@ describe("Bootcamp API", () => {
       .should("have.length", 20);
   });
 
+  it("Courses have bootcamp property", () => {
+    cy.request("/api/v1/courses").then(response => {
+      expect(response.body.data[0].bootcamp).to.have.property("name");
+    });
+  });
+
   it("Response have pagination", () => {
     cy.request("GET", "/api/v1/bootcamps")
       .its("body")
